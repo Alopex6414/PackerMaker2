@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="960,720" gdiplustext="true"> <!-- 窗口初始尺寸 -->
+    <Font id="0" name="Microsoft YaHei" size="12" bold="false" italic="false" default="true"/>
+	<Font id="1" name="Microsoft YaHei" size="14" bold="false" italic="false"/>
+	<Font id="2" name="Microsoft YaHei" size="16" bold="false" italic="false"/>
+	<Font id="3" name="Microsoft YaHei" size="18" bold="false" italic="false"/>
+    <Font id="4" name="Microsoft YaHei" size="9" bold="false" italic="false"/>
+    <Font id="5" name="Microsoft YaHei" size="14" bold="true" italic="false"/>
+    <VerticalLayout bkimage="file='res\FrameMainBack.png'"> <!-- 窗口背景颜色 -->
+        <HorizontalLayout height="28" bkimage="file='res\FrameMainTitle.png'"> <!-- 窗口标题栏 -->
+            <Button name="MinBtn" float="true" pos="1177,1,0,0" tooltip="最小化" width="34" height="26" normalimage="file='res\MinButton.png' source='0,0,34,26'" hotimage="file='res\MinButton.png' source='0,26,34,52'" pushedimage="file='res\MinButton.png' source='0,52,34,78'">
+            </Button>
+            <Button name="MaxBtn" float="true" pos="1211,1,0,0" tooltip="最大化" width="34" height="26" normalimage="file='res\MaxOriButton.png' source='0,0,34,26'" hotimage="file='res\MaxOriButton.png' source='0,26,34,52'" pushedimage="file='res\MaxOriButton.png' source='0,52,34,78'">
+            </Button>
+            <Button name="CloseBtn" float="true" pos="1245,1,0,0" tooltip="关闭" width="34" height="26" normalimage="file='res\CloseButton.png' source='0,0,34,26'" hotimage="file='res\CloseButton.png' source='0,26,34,52'" pushedimage="file='res\CloseButton.png' source='0,52,34,78'">
+            </Button>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

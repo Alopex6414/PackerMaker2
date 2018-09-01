@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PackerMaker2", "PackerMaker2\PackerMaker2.vcxproj", "{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Debug|x64.ActiveCfg = Debug|x64
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Debug|x64.Build.0 = Debug|x64
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Debug|x86.ActiveCfg = Debug|Win32
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Debug|x86.Build.0 = Debug|Win32
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Release|x64.ActiveCfg = Release|x64
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Release|x64.Build.0 = Release|x64
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Release|x86.ActiveCfg = Release|Win32
+		{61CD04B5-A353-40B1-BE0F-AD43DEC4F538}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC3D1C83-50C2-42DD-ADDC-8F1A93E17454}
+	EndGlobalSection
+EndGlobal
