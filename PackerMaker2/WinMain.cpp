@@ -28,10 +28,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	HRESULT Hr = ::CoInitialize(NULL);
 	if (FAILED(Hr)) return -1;
 
-	//CFrameWndMain cMainFrame;
-	//cMainFrame.Create(NULL, _T("TyEnvironmentMonitorB"), WS_POPUP, WS_EX_WINDOWEDGE);
-	//cMainFrame.CenterWindow();
-	//cMainFrame.ShowModal();
+	CFrameWndMain cMainFrame;
+	cMainFrame.Create(NULL, _T("PackerMaker"), WS_POPUP, WS_EX_WINDOWEDGE);
+	cMainFrame.CenterWindow();
+	cMainFrame.ShowModal();
 
 	::CoUninitialize();
 

@@ -24,7 +24,7 @@ public:
 	virtual LPCTSTR GetWindowClassName() const;
 
 protected:
-	void MoveCaption(LPARAM lParam, BOOL& bHandled);
+	virtual void MoveCaption(LPARAM lParam, BOOL& bHandled);
 
 protected:
 	CPaintManagerUI m_PaintManager;

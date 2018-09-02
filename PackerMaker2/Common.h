@@ -39,6 +39,7 @@
 //Include Frame Window Header File
 #include "CommonWnd.h"
 #include "FrameWndBase.h"
+#include "FrameWndMain.h"
 
 // Include Windows Library
 #pragma comment(lib, "Shlwapi.lib")

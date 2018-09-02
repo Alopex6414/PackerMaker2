@@ -22,8 +22,29 @@
 class CFrameWndMain : public CFrameWndBase
 {
 public:
+	virtual LPCTSTR GetWindowClassName() const;
+	virtual void Notify(TNotifyUI& msg);
+	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+protected:
+	virtual void MoveCaption(LPARAM lParam, BOOL& bHandled);
 
 private:
+
+
+public:
+	CButtonUI* m_pMaxBtn;
+	CButtonUI* m_pMinBtn;
+
+public:
+	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+
+public:
+	void OnLButtonClickedMinBtn();
+	void OnLButtonClickedMaxBtn();
+	void OnLButtonClickedCloseBtn();
 
 };
 
