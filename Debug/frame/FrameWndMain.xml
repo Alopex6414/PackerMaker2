@@ -24,6 +24,24 @@
                     </Container>
                     <Button  name="SigleFileBtn" float="true" pos="0,32,0,0" tooltip="单文件" width="180" height="32" normalimage="file='res\SigleFileBtn.png' source='0,0,180,32'" hotimage="file='res\SigleFileBtn.png' source='0,32,180,64'" pushedimage="file='res\SigleFileBtn.png' source='0,64,180,96'">
                     </Button>
+                    <Button  name="MutiFileBtn" float="true" pos="0,64,0,0" tooltip="多文件" width="180" height="32" normalimage="file='res\MutiFileBtn.png' source='0,0,180,32'" hotimage="file='res\MutiFileBtn.png' source='0,32,180,64'" pushedimage="file='res\MutiFileBtn.png' source='0,64,180,96'">
+                    </Button>
+                    <Button  name="TextFileBtn" float="true" pos="0,96,0,0" tooltip="文本文件" width="180" height="32" normalimage="file='res\TextFileBtn.png' source='0,0,180,32'" hotimage="file='res\TextFileBtn.png' source='0,32,180,64'" pushedimage="file='res\TextFileBtn.png' source='0,64,180,96'">
+                    </Button>
+                    <Button  name="AppFileBtn" float="true" pos="0,128,0,0" tooltip="应用程序" width="180" height="32" normalimage="file='res\AppFileBtn.png' source='0,0,180,32'" hotimage="file='res\AppFileBtn.png' source='0,32,180,64'" pushedimage="file='res\AppFileBtn.png' source='0,64,180,96'">
+                    </Button>
+                    <Container name="LabelConfigs" float="true" pos="0,160,0,0" width="180" height="32" bkimage="file='res\LabelConfigs.png'">
+                    </Container>
+                    <Button  name="CipherBtn" float="true" pos="0,192,0,0" tooltip="加密密码" width="180" height="32" normalimage="file='res\CipherBtn.png' source='0,0,180,32'" hotimage="file='res\CipherBtn.png' source='0,32,180,64'" pushedimage="file='res\CipherBtn.png' source='0,64,180,96'">
+                    </Button>
+                    <Button  name="CipherInfoBtn" float="true" pos="0,224,0,0" tooltip="加密信息" width="180" height="32" normalimage="file='res\CipherInfoBtn.png' source='0,0,180,32'" hotimage="file='res\CipherInfoBtn.png' source='0,32,180,64'" pushedimage="file='res\CipherInfoBtn.png' source='0,64,180,96'">
+                    </Button>
+                    <Button  name="MoreSetBtn" float="true" pos="0,256,0,0" tooltip="更多设置" width="180" height="32" normalimage="file='res\MoreSetBtn.png' source='0,0,180,32'" hotimage="file='res\MoreSetBtn.png' source='0,32,180,64'" pushedimage="file='res\MoreSetBtn.png' source='0,64,180,96'">
+                    </Button>
+                    <Container name="LabelAbout" float="true" pos="0,288,0,0" width="180" height="32" bkimage="file='res\LabelAbout.png'">
+                    </Container>
+                    <Button  name="AboutInfoBtn" float="true" pos="0,320,0,0" tooltip="关于信息" width="180" height="32" normalimage="file='res\AboutInfoBtn.png' source='0,0,180,32'" hotimage="file='res\AboutInfoBtn.png' source='0,32,180,64'" pushedimage="file='res\AboutInfoBtn.png' source='0,64,180,96'">
+                    </Button>
                 </Container>
             </VerticalLayout>
         </HorizontalLayout>
