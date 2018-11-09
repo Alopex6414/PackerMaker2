@@ -22,6 +22,8 @@
                 <Container name="MenuBack" float="true" pos="1,0,0,0" width="180" height="690" bkimage="file='res\FrameMainMenuBack.png'">
                     <Container name="LabelApps" float="true" pos="0,0,0,0" width="180" height="32" bkimage="file='res\LabelApps.png'">
                     </Container>
+                    <Button  name="SigleFileBtn" float="true" pos="0,32,0,0" tooltip="单文件" width="180" height="32" normalimage="file='res\SigleFileBtn.png' source='0,0,180,32'" hotimage="file='res\SigleFileBtn.png' source='0,32,180,64'" pushedimage="file='res\SigleFileBtn.png' source='0,64,180,96'">
+                    </Button>
                 </Container>
             </VerticalLayout>
         </HorizontalLayout>
