@@ -36,6 +36,17 @@ public:
 	CButtonUI* m_pMaxBtn;
 	CButtonUI* m_pMinBtn;
 
+	COptionUI* m_pSingleFileBtn;
+	COptionUI* m_pMultiFileBtn;
+	COptionUI* m_pTextFileBtn;
+	COptionUI* m_pAppFileBtn;
+
+	COptionUI* m_pCipherBtn;
+	COptionUI* m_pCipherInfoBtn;
+	COptionUI* m_pMoreInfoBtn;
+
+	COptionUI* m_pAboutInfoBtn;
+
 public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
