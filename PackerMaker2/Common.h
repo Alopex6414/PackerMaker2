@@ -40,6 +40,15 @@
 #include "CommonWnd.h"
 #include "FrameWndBase.h"
 #include "FrameWndMain.h"
+#include "FrameWndSingleFile.h"
+#include "FrameWndMultipleFile.h"
+#include "FrameWndTextFile.h"
+#include "FrameWndAppsFile.h"
+#include "FrameWndCipherConfig.h"
+#include "FrameWndCipherInfo.h"
+#include "FrameWndMoreInfo.h"
+#include "FrameWndAboutInfo.h"
+#include "DialogBuilderCallbackEx.h"
 
 // Include Windows Library
 #pragma comment(lib, "Shlwapi.lib")

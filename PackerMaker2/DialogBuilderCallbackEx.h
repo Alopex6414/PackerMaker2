@@ -14,8 +14,10 @@
 #ifndef __DIALOGBUILDERCALLBACKEX_H_
 #define __DIALOGBUILDERCALLBACKEX_H_
 
+// Include Common Header File
 #include "Common.h"
 
+// Class Definition
 class CDialogBuilderCallbackEx : public IDialogBuilderCallback
 {
 private:

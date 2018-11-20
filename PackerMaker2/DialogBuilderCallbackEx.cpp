@@ -13,24 +13,44 @@
 
 CControlUI * CDialogBuilderCallbackEx::CreateControl(LPCTSTR pstrClass)
 {
-	if (_tcscmp(pstrClass, _T("FrameWndRealTimeStatus")) == 0)
+	if (_tcscmp(pstrClass, _T("FrameWndSigleFile")) == 0)
 	{
-		return new CFrameWndRealTimeStatusUI();
+		return new CFrameWndSingleFileUI();
 	}
 
-	if (_tcscmp(pstrClass, _T("FrameWndAlarmRecord")) == 0)
+	if (_tcscmp(pstrClass, _T("FrameWndMultiFile")) == 0)
 	{
-		return new CFrameWndAlarmRecordUI();
+		return new CFrameWndMultipleFileUI();
 	}
 
-	if (_tcscmp(pstrClass, _T("FrameWndDeviceManagement")) == 0)
+	if (_tcscmp(pstrClass, _T("FrameWndTextFile")) == 0)
 	{
-		return new CFrameWndDeviceManagementUI();
+		return new CFrameWndTextFileUI();
 	}
 
-	if (_tcscmp(pstrClass, _T("FrameWndUserManagement")) == 0)
+	if (_tcscmp(pstrClass, _T("FrameWndAppsFile")) == 0)
 	{
-		return new CFrameWndUserManagementUI();
+		return new CFrameWndAppsFileUI();
+	}
+
+	if (_tcscmp(pstrClass, _T("FrameWndCipherConfig")) == 0)
+	{
+		return new CFrameWndCipherConfigUI();
+	}
+
+	if (_tcscmp(pstrClass, _T("FrameWndCipherInfo")) == 0)
+	{
+		return new CFrameWndCipherInfoUI();
+	}
+
+	if (_tcscmp(pstrClass, _T("FrameWndMoreInfo")) == 0)
+	{
+		return new CFrameWndMoreInfoUI();
+	}
+
+	if (_tcscmp(pstrClass, _T("FrameWndAboutInfo")) == 0)
+	{
+		return new CFrameWndAboutInfoUI();
 	}
 
 	return NULL;

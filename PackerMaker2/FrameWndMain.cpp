@@ -37,6 +37,43 @@ void CFrameWndMain::Notify(TNotifyUI & msg)
 		}
 		
 	}
+	else if (msg.sType == _T("selectchanged"))
+	{
+		CTabLayoutUI* pControl = static_cast<CTabLayoutUI*>(m_PaintManager.FindControl(_T("FrameMainMenu")));
+		if (msg.pSender == m_pSingleFileBtn)
+		{
+			pControl->SelectItem(0);
+		}
+		else if (msg.pSender == m_pMultiFileBtn)
+		{
+			pControl->SelectItem(1);
+		}
+		else if (msg.pSender == m_pTextFileBtn)
+		{
+			pControl->SelectItem(2);
+		}
+		else if (msg.pSender == m_pAppFileBtn)
+		{
+			pControl->SelectItem(3);
+		}
+		else if (msg.pSender == m_pCipherBtn)
+		{
+			pControl->SelectItem(4);
+		}
+		else if (msg.pSender == m_pCipherInfoBtn)
+		{
+			pControl->SelectItem(5);
+		}
+		else if (msg.pSender == m_pMoreInfoBtn)
+		{
+			pControl->SelectItem(6);
+		}
+		else if (msg.pSender == m_pAboutInfoBtn)
+		{
+			pControl->SelectItem(7);
+		}
+
+	}
 
 }
 
@@ -109,7 +146,8 @@ LRESULT CFrameWndMain::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & 
 	m_PaintManager.Init(m_hWnd);
 
 	CDialogBuilder builder;
-	CControlUI* pRoot = builder.Create(_T("frame\\FrameWndMain.xml"), (UINT)0, NULL, &m_PaintManager);
+	CDialogBuilderCallbackEx cb;
+	CControlUI* pRoot = builder.Create(_T("frame\\FrameWndMain.xml"), (UINT)0, &cb, &m_PaintManager);
 	ASSERT(pRoot && "Failed to parse XML");
 
 	m_PaintManager.AttachDialog(pRoot);
