@@ -44,6 +44,34 @@
                     </Option>
                 </Container>
             </VerticalLayout>
+            <HorizontalLayout width="779" height="690">
+                <TabLayout name="FrameMainMenu">
+                    <HorizontalLayout>
+                        <FrameWndSigleFile \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndMultiFile \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndTextFile \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndAppsFile \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndCipherConfig \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndCipherInfo \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndMoreInfo \>
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndAboutInfo \>
+                    </HorizontalLayout>
+                </TabLayout>
+            </HorizontalLayout>
         </HorizontalLayout>
     </VerticalLayout>
 </Window>

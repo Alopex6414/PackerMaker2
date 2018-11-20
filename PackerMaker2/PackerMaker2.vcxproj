@@ -128,15 +128,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DialogBuilderCallbackEx.cpp" />
+    <ClCompile Include="FrameWndAboutInfo.cpp" />
+    <ClCompile Include="FrameWndAppsFile.cpp" />
     <ClCompile Include="FrameWndBase.cpp" />
+    <ClCompile Include="FrameWndCipherConfig.cpp" />
+    <ClCompile Include="FrameWndCipherInfo.cpp" />
     <ClCompile Include="FrameWndMain.cpp" />
+    <ClCompile Include="FrameWndMoreInfo.cpp" />
+    <ClCompile Include="FrameWndMultipleFile.cpp" />
+    <ClCompile Include="FrameWndSingleFile.cpp" />
+    <ClCompile Include="FrameWndTextFile.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
     <ClInclude Include="CommonWnd.h" />
+    <ClInclude Include="DialogBuilderCallbackEx.h" />
+    <ClInclude Include="FrameWndAboutInfo.h" />
+    <ClInclude Include="FrameWndAppsFile.h" />
     <ClInclude Include="FrameWndBase.h" />
+    <ClInclude Include="FrameWndCipherConfig.h" />
+    <ClInclude Include="FrameWndCipherInfo.h" />
     <ClInclude Include="FrameWndMain.h" />
+    <ClInclude Include="FrameWndMoreInfo.h" />
+    <ClInclude Include="FrameWndMultipleFile.h" />
+    <ClInclude Include="FrameWndSingleFile.h" />
+    <ClInclude Include="FrameWndTextFile.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="WinMain.h" />
   </ItemGroup>

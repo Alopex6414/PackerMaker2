@@ -24,6 +24,33 @@
     <ClCompile Include="FrameWndMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DialogBuilderCallbackEx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndSingleFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndMultipleFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndTextFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndAppsFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndCipherConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndCipherInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndMoreInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameWndAboutInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinMain.h">
@@ -42,6 +69,33 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FrameWndMain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogBuilderCallbackEx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndSingleFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndMultipleFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndTextFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndAppsFile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndCipherConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndCipherInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndMoreInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndAboutInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
