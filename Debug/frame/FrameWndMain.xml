@@ -47,28 +47,28 @@
             <HorizontalLayout width="779" height="690">
                 <TabLayout name="FrameMainMenu">
                     <HorizontalLayout>
-                        <FrameWndSigleFile \>
+                        <FrameWndSigleFile />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndMultiFile \>
+                        <FrameWndMultiFile />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndTextFile \>
+                        <FrameWndTextFile />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndAppsFile \>
+                        <FrameWndAppsFile />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndCipherConfig \>
+                        <FrameWndCipherConfig />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndCipherInfo \>
+                        <FrameWndCipherInfo />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndMoreInfo \>
+                        <FrameWndMoreInfo />
                     </HorizontalLayout>
                     <HorizontalLayout>
-                        <FrameWndAboutInfo \>
+                        <FrameWndAboutInfo />
                     </HorizontalLayout>
                 </TabLayout>
             </HorizontalLayout>

@@ -7,13 +7,71 @@
     <Font id="4" name="Microsoft YaHei" size="9" bold="false" italic="false"/>
     <Font id="5" name="Microsoft YaHei" size="14" bold="true" italic="false"/>
     <VerticalLayout bkimage="file='res\FrameMainBack.png'"> <!-- 窗口背景颜色 -->
-        <HorizontalLayout height="28" bkimage="file='res\FrameMainTitle.png'"> <!-- 窗口标题栏 -->
+        <HorizontalLayout height="27" bkimage="file='res\FrameMainTitle.png'"> <!-- 窗口标题栏 -->
             <Button name="MinBtn" float="true" pos="857,1,0,0" tooltip="最小化" width="34" height="26" normalimage="file='res\MinBtn.png' source='0,0,34,26'" hotimage="file='res\MinBtn.png' source='0,26,34,52'" pushedimage="file='res\MinBtn.png' source='0,52,34,78'">
             </Button>
             <Button name="MaxBtn" float="true" pos="891,1,0,0" tooltip="最大化" width="34" height="26" normalimage="file='res\MaxBtn.png' source='0,0,34,26'" hotimage="file='res\MaxBtn.png' source='0,26,34,52'" pushedimage="file='res\MaxBtn.png' source='0,52,34,78'">
             </Button>
             <Button name="CloseBtn" float="true" pos="925,1,0,0" tooltip="关闭" width="34" height="26" normalimage="file='res\CloseBtn.png' source='0,0,34,26'" hotimage="file='res\CloseBtn.png' source='0,26,34,52'" pushedimage="file='res\CloseBtn.png' source='0,52,34,78'">
             </Button>
+        </HorizontalLayout>
+        <HorizontalLayout height="2" bkimage="file='res\FrameMainTitleline.png'"> <!-- 标题栏分隔线 -->
+        </HorizontalLayout>
+        <HorizontalLayout height="690">
+            <VerticalLayout width="181" height="690">
+                <Container name="MenuBack" float="true" pos="1,0,0,0" width="180" height="690" bkimage="file='res\FrameMainMenuBack.png'">
+                    <Container name="LabelApps" float="true" pos="0,0,0,0" width="180" height="32" bkimage="file='res\LabelApps.png'">
+                    </Container>
+                    <Option name="SigleFileBtn" float="true" pos="0,32,0,0" tooltip="单文件" width="180" height="32" group="Menu" selected="true" normalimage="file='res\SigleFileBtn.png' source='0,0,180,32'" hotimage="file='res\SigleFileBtn.png' source='0,32,180,64'" pushedimage="file='res\SigleFileBtn.png' source='0,64,180,96'" selectedimage="file='res\SigleFileBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Option name="MutiFileBtn" float="true" pos="0,64,0,0" tooltip="多文件" width="180" height="32" group="Menu" selected="false" normalimage="file='res\MutiFileBtn.png' source='0,0,180,32'" hotimage="file='res\MutiFileBtn.png' source='0,32,180,64'" pushedimage="file='res\MutiFileBtn.png' source='0,64,180,96'" selectedimage="file='res\MutiFileBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Option name="TextFileBtn" float="true" pos="0,96,0,0" tooltip="文本文件" width="180" height="32" group="Menu" selected="false" normalimage="file='res\TextFileBtn.png' source='0,0,180,32'" hotimage="file='res\TextFileBtn.png' source='0,32,180,64'" pushedimage="file='res\TextFileBtn.png' source='0,64,180,96'" selectedimage="file='res\TextFileBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Option name="AppFileBtn" float="true" pos="0,128,0,0" tooltip="应用程序" width="180" height="32" group="Menu" selected="false" normalimage="file='res\AppFileBtn.png' source='0,0,180,32'" hotimage="file='res\AppFileBtn.png' source='0,32,180,64'" pushedimage="file='res\AppFileBtn.png' source='0,64,180,96'" selectedimage="file='res\AppFileBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Container name="LabelConfigs" float="true" pos="0,160,0,0" width="180" height="32" bkimage="file='res\LabelConfigs.png'">
+                    </Container>
+                    <Option name="CipherBtn" float="true" pos="0,192,0,0" tooltip="加密密码" width="180" height="32" group="Menu" selected="false" normalimage="file='res\CipherBtn.png' source='0,0,180,32'" hotimage="file='res\CipherBtn.png' source='0,32,180,64'" pushedimage="file='res\CipherBtn.png' source='0,64,180,96'" selectedimage="file='res\CipherBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Option name="CipherInfoBtn" float="true" pos="0,224,0,0" tooltip="加密信息" width="180" height="32" group="Menu" selected="false" normalimage="file='res\CipherInfoBtn.png' source='0,0,180,32'" hotimage="file='res\CipherInfoBtn.png' source='0,32,180,64'" pushedimage="file='res\CipherInfoBtn.png' source='0,64,180,96'" selectedimage="file='res\CipherInfoBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Option name="MoreSetBtn" float="true" pos="0,256,0,0" tooltip="更多设置" width="180" height="32" group="Menu" selected="false" normalimage="file='res\MoreSetBtn.png' source='0,0,180,32'" hotimage="file='res\MoreSetBtn.png' source='0,32,180,64'" pushedimage="file='res\MoreSetBtn.png' source='0,64,180,96'" selectedimage="file='res\MoreSetBtn.png' source='0,64,180,96'">
+                    </Option>
+                    <Container name="LabelAbout" float="true" pos="0,288,0,0" width="180" height="32" bkimage="file='res\LabelAbout.png'">
+                    </Container>
+                    <Option name="AboutInfoBtn" float="true" pos="0,320,0,0" tooltip="关于信息" width="180" height="32" group="Menu" selected="false" normalimage="file='res\AboutInfoBtn.png' source='0,0,180,32'" hotimage="file='res\AboutInfoBtn.png' source='0,32,180,64'" pushedimage="file='res\AboutInfoBtn.png' source='0,64,180,96'" selectedimage="file='res\AboutInfoBtn.png' source='0,64,180,96'">
+                    </Option>
+                </Container>
+            </VerticalLayout>
+            <HorizontalLayout width="779" height="690">
+                <TabLayout name="FrameMainMenu">
+                    <HorizontalLayout>
+                        <FrameWndSigleFile />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndMultiFile />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndTextFile />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndAppsFile />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndCipherConfig />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndCipherInfo />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndMoreInfo />
+                    </HorizontalLayout>
+                    <HorizontalLayout>
+                        <FrameWndAboutInfo />
+                    </HorizontalLayout>
+                </TabLayout>
+            </HorizontalLayout>
         </HorizontalLayout>
     </VerticalLayout>
 </Window>
