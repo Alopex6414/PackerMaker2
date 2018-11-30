@@ -18,6 +18,12 @@ LPCTSTR CFrameWndMain::GetWindowClassName() const
 	return _T("FrameWndMain");
 }
 
+// CFrameWndMain 获取窗口类型
+UINT CFrameWndMain::GetClassStyle() const
+{
+	return CS_DBLCLKS;
+}
+
 // CFrameWndMain 窗口消息响应
 void CFrameWndMain::Notify(TNotifyUI & msg)
 {
@@ -191,12 +197,13 @@ LRESULT CFrameWndMain::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & b
 // CFrameWndMain 窗口鼠标左键单击最小化窗口
 void CFrameWndMain::OnLButtonClickedMinBtn()
 {
-	::ShowWindow(this->GetHWND(), SW_SHOWMINIMIZED);
+	SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0);
 }
 
 // CFrameWndMain 窗口鼠标左键单击最大化窗口
 void CFrameWndMain::OnLButtonClickedMaxBtn()
 {
+	SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 }
 
 // CFrameWndMain 窗口鼠标左键单击关闭窗口

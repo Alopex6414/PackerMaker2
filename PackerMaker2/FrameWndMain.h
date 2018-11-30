@@ -23,6 +23,7 @@ class CFrameWndMain : public CFrameWndBase
 {
 public:
 	virtual LPCTSTR GetWindowClassName() const;
+	virtual UINT GetClassStyle() const;
 	virtual void Notify(TNotifyUI& msg);
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
