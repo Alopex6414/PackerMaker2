@@ -100,6 +100,9 @@ LRESULT CFrameWndMain::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CLOSE:
 		lRes = OnClose(uMsg, wParam, lParam, bHandled);
 		break;
+	case WM_NCACTIVATE:
+		lRes = OnNcActivate(uMsg, wParam, lParam, bHandled);
+		break;
 	default:
 		bHandled = FALSE;
 		break;
@@ -130,9 +133,12 @@ void CFrameWndMain::MoveCaption(LPARAM lParam, BOOL & bHandled)
 	sPoint.x = GET_X_LPARAM(lParam);
 	sPoint.y = GET_Y_LPARAM(lParam);
 
+	RECT Rect;
+	GetWindowRect(this->GetHWND(), &Rect);
+
 	CControlUI* pNewHover = m_PaintManager.FindControl(sPoint); //判断是否位于关闭按钮
 
-	if (sPoint.x >= 0 && sPoint.x <= m_nWidth
+	if (sPoint.x >= 0 && sPoint.x <= (Rect.right - Rect.left)
 		&& sPoint.y >= 0 && sPoint.y <= m_nCaptionSpace
 		&& pNewHover != m_pCloseBtn
 		&& pNewHover != m_pMaxBtn
@@ -191,6 +197,28 @@ LRESULT CFrameWndMain::OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 LRESULT CFrameWndMain::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
 {
 	bHandled = FALSE;
+	return 0;
+}
+
+// CFrameWndMain 窗口活动响应
+LRESULT CFrameWndMain::OnNcActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	if (::IsIconic(*this)) 
+	{
+		bHandled = FALSE;
+	}
+	return (wParam == 0) ? TRUE : FALSE;
+}
+
+// CFrameWndMain 窗口计算大小响应
+LRESULT CFrameWndMain::OnNcCalcSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	return 0;
+}
+
+// CFrameWndMain 窗口绘制响应
+LRESULT CFrameWndMain::OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
 	return 0;
 }
 
