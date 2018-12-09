@@ -6,4 +6,36 @@
 	<Font id="3" name="Microsoft YaHei" size="18" bold="false" italic="false"/>
     <Font id="4" name="Microsoft YaHei" size="9" bold="false" italic="false"/>
     <Font id="5" name="Microsoft YaHei" size="14" bold="true" italic="false"/>
+    <VerticalLayout bkimage="file='res\FrameSingleFileBack.png'"> <!-- 窗口背景颜色 -->
+        <!-- EnCrypt -->
+        <Edit name="OriginFileType" float="true" pos="178,87,0,0" width="80" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
+        </Edit>
+        <Edit name="EnCryptFileType" float="true" pos="423,87,0,0" width="80" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="false" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
+        </Edit>
+        <Edit name="OriginFilePath" float="true" pos="178,150,0,0" width="400" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEdit.png' source='0,0,400,24'" hotimage="file='res\PathEdit.png' source='0,24,400,48'" pushedimage="file='res\PathEdit.png' source='0,24,400,48'" nativebkcolor="#FF232326">
+        </Edit>
+        <Edit name="EnCryptFilePath" float="true" pos="178,220,0,0" width="400" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEdit.png' source='0,0,400,24'" hotimage="file='res\PathEdit.png' source='0,24,400,48'" pushedimage="file='res\PathEdit.png' source='0,24,400,48'" nativebkcolor="#FF232326">
+        </Edit>
+        <Button name="EnCryptImportBtn" float="true" pos="598,150,0,0" tooltip="导入" width="80" height="24" normalimage="file='res\ImportBtn.png' source='0,0,80,24'" hotimage="file='res\ImportBtn.png' source='0,24,80,48'" pushedimage="file='res\ImportBtn.png' source='0,48,80,72'">
+        </Button>
+        <Button name="EnCryptExportBtn" float="true" pos="598,220,0,0" tooltip="导出" width="80" height="24" normalimage="file='res\ExportBtn.png' source='0,0,80,24'" hotimage="file='res\ExportBtn.png' source='0,24,80,48'" pushedimage="file='res\ExportBtn.png' source='0,48,80,72'">
+        </Button>
+        <Button name="EnCryptStartBtn" float="true" pos="598,290,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
+        </Button>
+        <Text name="EnCryptStatus" text="等待..." float="true" pos="158,290,0,0" width="80" height="24" textcolor="#FFD7D7D7" font="1">
+        </Text>
+        <!-- DeCrypt -->
+        <Edit name="DeCryptFilePath" float="true" pos="178,427,0,0" width="400" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEdit.png' source='0,0,400,24'" hotimage="file='res\PathEdit.png' source='0,24,400,48'" pushedimage="file='res\PathEdit.png' source='0,24,400,48'" nativebkcolor="#FF232326">
+        </Edit>
+        <Edit name="DestFilePath" float="true" pos="178,497,0,0" width="400" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEdit.png' source='0,0,400,24'" hotimage="file='res\PathEdit.png' source='0,24,400,48'" pushedimage="file='res\PathEdit.png' source='0,24,400,48'" nativebkcolor="#FF232326">
+        </Edit>
+        <Button name="DeCryptImportBtn" float="true" pos="598,427,0,0" tooltip="导入" width="80" height="24" normalimage="file='res\ImportBtn.png' source='0,0,80,24'" hotimage="file='res\ImportBtn.png' source='0,24,80,48'" pushedimage="file='res\ImportBtn.png' source='0,48,80,72'">
+        </Button>
+        <Button name="DeCryptExportBtn" float="true" pos="598,497,0,0" tooltip="导出" width="80" height="24" normalimage="file='res\ExportBtn.png' source='0,0,80,24'" hotimage="file='res\ExportBtn.png' source='0,24,80,48'" pushedimage="file='res\ExportBtn.png' source='0,48,80,72'">
+        </Button>
+        <Button name="DeCryptStartBtn" float="true" pos="598,579,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
+        </Button>
+        <Text name="DeCryptStatus" text="等待..." float="true" pos="158,579,0,0" width="80" height="24" textcolor="#FFD7D7D7" font="1">
+        </Text>
+    </VerticalLayout>
 </Window>
