@@ -190,6 +190,23 @@ LRESULT CFrameWndMain::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & 
 
 	m_pAboutInfoBtn = static_cast<COptionUI*>(m_PaintManager.FindControl(_T("AboutInfoBtn")));
 
+	// Sigle File
+	m_pOriginFileType = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("OriginFileType")));
+	m_pEnCryptFileType = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("EnCryptFileType")));
+	m_pOriginFilePath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("OriginFilePath")));
+	m_pEnCryptFilePath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("EnCryptFilePath")));
+	m_pEnCryptImportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("EnCryptImportBtn")));
+	m_pEnCryptExportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("EnCryptExportBtn")));
+	m_pEnCryptStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("EnCryptStartBtn")));
+	m_pEnCryptStatus = static_cast<CTextUI*>(m_PaintManager.FindControl(_T("EnCryptStatus")));
+
+	m_pDeCryptFilePath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("DeCryptFilePath")));
+	m_pDestFilePath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("DestFilePath")));
+	m_pDeCryptImportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("DeCryptImportBtn")));
+	m_pDeCryptExportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("DeCryptExportBtn")));
+	m_pDeCryptStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("DeCryptStartBtn")));
+	m_pDeCryptStatus = static_cast<CTextUI*>(m_PaintManager.FindControl(_T("DeCryptStatus")));
+
 	SetWindowInfo(960, 720);
 
 	return 0;

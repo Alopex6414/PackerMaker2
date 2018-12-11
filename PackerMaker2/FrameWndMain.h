@@ -48,6 +48,23 @@ public:
 
 	COptionUI* m_pAboutInfoBtn;
 
+	// Sigle File
+	CEditUI* m_pOriginFileType;
+	CEditUI* m_pEnCryptFileType;
+	CEditUI* m_pOriginFilePath;
+	CEditUI* m_pEnCryptFilePath;
+	CButtonUI* m_pEnCryptImportBtn;
+	CButtonUI* m_pEnCryptExportBtn;
+	CButtonUI* m_pEnCryptStartBtn;
+	CTextUI* m_pEnCryptStatus;
+
+	CEditUI* m_pDeCryptFilePath;
+	CEditUI* m_pDestFilePath;
+	CButtonUI* m_pDeCryptImportBtn;
+	CButtonUI* m_pDeCryptExportBtn;
+	CButtonUI* m_pDeCryptStartBtn;
+	CTextUI* m_pDeCryptStatus;
+
 public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
