@@ -79,6 +79,13 @@ public:
 	void OnLButtonClickedMaxBtn();
 	void OnLButtonClickedCloseBtn();
 
+	void OnLButtonClickedEnCryptImportBtn();
+	void OnLButtonClickedEnCryptExportBtn();
+	void OnLButtonClickedEnCryptStartBtn();
+	void OnLButtonClickedDeCryptImportBtn();
+	void OnLButtonClickedDeCryptExportBtn();
+	void OnLButtonClickedDeCryptStartBtn();
+
 };
 
 #endif // !__FRAMEWNDMAIN_H__

@@ -41,6 +41,30 @@ void CFrameWndMain::Notify(TNotifyUI & msg)
 		{
 			OnLButtonClickedMinBtn();
 		}
+		else if (msg.pSender == m_pEnCryptImportBtn)
+		{
+			OnLButtonClickedEnCryptImportBtn();
+		}
+		else if (msg.pSender == m_pEnCryptExportBtn)
+		{
+			OnLButtonClickedEnCryptExportBtn();
+		}
+		else if (msg.pSender == m_pEnCryptStartBtn)
+		{
+			OnLButtonClickedEnCryptStartBtn();
+		}
+		else if (msg.pSender == m_pDeCryptImportBtn)
+		{
+			OnLButtonClickedDeCryptImportBtn();
+		}
+		else if (msg.pSender == m_pDeCryptExportBtn)
+		{
+			OnLButtonClickedDeCryptExportBtn();
+		}
+		else if (msg.pSender == m_pDeCryptStartBtn)
+		{
+			OnLButtonClickedDeCryptStartBtn();
+		}
 		
 	}
 	else if (msg.sType == _T("selectchanged"))
@@ -289,4 +313,138 @@ void CFrameWndMain::OnLButtonClickedMaxBtn()
 void CFrameWndMain::OnLButtonClickedCloseBtn()
 {
 	::PostMessageA(this->GetHWND(), WM_CLOSE, (WPARAM)0, (LPARAM)0);
+}
+
+// CFrameWndMain 窗口鼠标左键单击加密文件导入
+void CFrameWndMain::OnLButtonClickedEnCryptImportBtn()
+{
+	OPENFILENAME file;
+	WCHAR strfile[MAX_PATH] = { 0 };
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = _T("所有文件\0*.*\0\0");
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
+
+	if (GetOpenFileName(&file))
+	{
+		WCHAR* pTemp = NULL;
+
+		pTemp = wcsrchr(strfile, _T('.'));
+		if(pTemp != NULL)
+		{
+			m_pOriginFileType->SetText(++pTemp);
+		}
+		else
+		{
+			m_pOriginFileType->SetText(_T(""));
+		}
+
+		m_pOriginFilePath->SetText(strfile);
+	}
+
+}
+
+// CFrameWndMain 窗口鼠标左键单击加密文件导出
+void CFrameWndMain::OnLButtonClickedEnCryptExportBtn()
+{
+	CDuiString strType = _T("");
+	CDuiString strImport = _T("");
+
+	USES_CONVERSION;
+
+	strImport = m_pOriginFilePath->GetText();
+	if (!strcmp(T2A(strImport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择目标文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	strType = m_pEnCryptFileType->GetText();
+	if (!strcmp(T2A(strType.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请输入加密文件类型!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	if (strType.Find(_T(".")) != -1)
+	{
+		MessageBoxA(this->GetHWND(), "加密文件类型中不能包含'.'字符!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	OPENFILENAME file;
+	WCHAR strfile[MAX_PATH] = { 0 };
+	char chType[MAX_PATH] = { 0 };
+	char chFilter[MAX_PATH] = { 0 };
+	char* pTemp = NULL;
+	char* pStr = nullptr;
+	int nSize = 0;
+
+	strcpy_s(chType, T2A(strType.GetData()));
+	sprintf_s(chFilter, "%s文件*.%s", chType, chType);
+
+	nSize = strlen(chFilter) + 3;
+	pStr = new char[nSize];
+	memset(pStr, 0, nSize);
+	sprintf_s(pStr, nSize, "%s文件", chType);
+
+	for (pTemp = pStr; *pTemp != '\0'; ++pTemp);
+	sprintf_s(++pTemp, nSize, "*.%s", chType);
+
+	char chOriginFile[MAX_PATH] = { 0 };
+	char chOriginName[MAX_PATH] = { 0 };
+	char* pTemp2 = NULL;
+	char* pTemp3 = NULL;
+
+	strcpy_s(chOriginFile, T2A(strImport.GetData()));
+	pTemp2 = strrchr(chOriginFile, '\\');
+	strcpy_s(chOriginName, ++pTemp2);
+	pTemp3 = strrchr(chOriginName, '.');
+	if (pTemp3) *pTemp3 = '\0';
+	strcat_s(chOriginName, ".");
+	strcat_s(chOriginName, chType);
+	wcscpy_s(strfile, A2T(chOriginName));
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = A2T(pStr);
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+
+	if (GetSaveFileName(&file))
+	{
+		m_pEnCryptFilePath->SetText(strfile);
+	}
+
+	delete[] pStr;
+	pStr = nullptr;
+
+}
+
+// CFrameWndMain 窗口鼠标左键单击加密文件开始
+void CFrameWndMain::OnLButtonClickedEnCryptStartBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击解密文件导入
+void CFrameWndMain::OnLButtonClickedDeCryptImportBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击解密文件导出
+void CFrameWndMain::OnLButtonClickedDeCryptExportBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击解密文件开始
+void CFrameWndMain::OnLButtonClickedDeCryptStartBtn()
+{
 }

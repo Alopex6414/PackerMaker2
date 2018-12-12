@@ -33,6 +33,9 @@
 #include <iostream>
 #include <vector>
 
+// Inclue ATL Header File
+#include <atlconv.h>
+
 // Include Assert Header File
 #include <assert.h>
 

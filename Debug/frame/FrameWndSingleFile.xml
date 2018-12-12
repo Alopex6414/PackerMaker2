@@ -10,7 +10,7 @@
         <!-- EnCrypt -->
         <Edit name="OriginFileType" float="true" pos="178,87,0,0" width="80" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
         </Edit>
-        <Edit name="EnCryptFileType" float="true" pos="423,87,0,0" width="80" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="false" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
+        <Edit name="EnCryptFileType" float="true" pos="423,87,0,0" width="80" height="24" maxchar="4" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="false" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
         </Edit>
         <Edit name="OriginFilePath" float="true" pos="178,150,0,0" width="400" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEdit.png' source='0,0,400,24'" hotimage="file='res\PathEdit.png' source='0,24,400,48'" pushedimage="file='res\PathEdit.png' source='0,24,400,48'" nativebkcolor="#FF232326">
         </Edit>
