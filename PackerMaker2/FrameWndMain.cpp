@@ -432,6 +432,49 @@ void CFrameWndMain::OnLButtonClickedEnCryptExportBtn()
 // CFrameWndMain 窗口鼠标左键单击加密文件开始
 void CFrameWndMain::OnLButtonClickedEnCryptStartBtn()
 {
+	CDuiString strImport = _T("");
+	CDuiString strExport = _T("");
+
+	USES_CONVERSION;
+
+	strImport = m_pOriginFilePath->GetText();
+	if (!strcmp(T2A(strImport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择目标文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	strExport = m_pEnCryptFilePath->GetText();
+	if (!strcmp(T2A(strExport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择加密文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	m_pEnCryptStatus->SetText(_T("加密中..."));
+
+	DWORD dwLuckyNumberArr[4] =
+	{
+		0x00000000,
+		0x00000000,
+		0x00000000,
+		0x00000000,
+	};
+
+	srand((unsigned int)time(NULL));
+
+	for (auto &it : dwLuckyNumberArr)
+	{
+		it = rand();
+	}
+
+	CPlumCrypt* pCrypt = new CPlumCrypt;
+	pCrypt->PlumEnCryptFileExA(T2A(strImport), T2A(strExport), dwLuckyNumberArr);
+
+	m_pEnCryptStatus->SetText(_T("已完成"));
+
+	delete pCrypt;
+
 }
 
 // CFrameWndMain 窗口鼠标左键单击解密文件导入

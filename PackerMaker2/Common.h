@@ -39,6 +39,21 @@
 // Include Assert Header File
 #include <assert.h>
 
+// Include Prunus Header File
+#include "PlumCipherA.h"
+#include "PlumCommon.h"
+#include "PlumConsole.h"
+#include "PlumCrypt.h"
+#include "PlumFile.h"
+#include "PlumGraphics.h"
+#include "PlumIni.h"
+#include "PlumLog.h"
+#include "PlumLogEx.h"
+#include "PlumPack.h"
+#include "PlumPath.h"
+#include "PlumProcess.h"
+#include "PlumThread.h"
+
 //Include Frame Window Header File
 #include "CommonWnd.h"
 #include "FrameWndBase.h"
@@ -55,6 +70,9 @@
 
 // Include Windows Library
 #pragma comment(lib, "Shlwapi.lib")
+
+// Include Prunus Library
+#pragma comment(lib, "Prunus.lib")
 
 #endif // !__COMMON_H__
 

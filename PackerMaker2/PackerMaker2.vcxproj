@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)DuiLib\DuiLib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)DuiLib\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)DuiLib\DuiLib;$(SolutionDir)Prunus\Inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)DuiLib\Lib;$(SolutionDir)Prunus\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)DuiLib\DuiLib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)DuiLib\Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)DuiLib\DuiLib;$(SolutionDir)Prunus\Inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)DuiLib\Lib;$(SolutionDir)Prunus\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -142,6 +142,19 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Prunus\Inc\PlumCipherA.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumCommon.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumConsole.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumCrypt.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumFile.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumGraphics.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumIni.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumLog.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumLogEx.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumPack.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumPath.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumProcess.h" />
+    <ClInclude Include="..\Prunus\Inc\PlumThread.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="CommonWnd.h" />
     <ClInclude Include="DialogBuilderCallbackEx.h" />

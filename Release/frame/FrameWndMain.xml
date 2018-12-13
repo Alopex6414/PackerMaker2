@@ -7,13 +7,19 @@
     <Font id="4" name="Microsoft YaHei" size="9" bold="false" italic="false"/>
     <Font id="5" name="Microsoft YaHei" size="14" bold="true" italic="false"/>
     <VerticalLayout bkimage="file='res\FrameMainBack.png'"> <!-- 窗口背景颜色 -->
-        <HorizontalLayout height="27" bkimage="file='res\FrameMainTitle.png'"> <!-- 窗口标题栏 -->
-            <Button name="MinBtn" float="true" pos="857,1,0,0" tooltip="最小化" width="34" height="26" normalimage="file='res\MinBtn.png' source='0,0,34,26'" hotimage="file='res\MinBtn.png' source='0,26,34,52'" pushedimage="file='res\MinBtn.png' source='0,52,34,78'">
-            </Button>
-            <Button name="MaxBtn" float="true" pos="891,1,0,0" tooltip="最大化" width="34" height="26" normalimage="file='res\MaxBtn.png' source='0,0,34,26'" hotimage="file='res\MaxBtn.png' source='0,26,34,52'" pushedimage="file='res\MaxBtn.png' source='0,52,34,78'">
-            </Button>
-            <Button name="CloseBtn" float="true" pos="925,1,0,0" tooltip="关闭" width="34" height="26" normalimage="file='res\CloseBtn.png' source='0,0,34,26'" hotimage="file='res\CloseBtn.png' source='0,26,34,52'" pushedimage="file='res\CloseBtn.png' source='0,52,34,78'">
-            </Button>
+        <HorizontalLayout height="27" bkcolor="0xFF2D2D30"> <!-- 窗口标题栏 -->
+            <HorizontalLayout>
+                <Container name="Icon" float="true" pos="0,0,0,0" width="960" height="27" bkimage="file='res\FrameMainTitleIcon.png'">
+                </Container>
+            </HorizontalLayout>
+            <HorizontalLayout width="102" inset="0,1,0,0">
+                <Button name="MinBtn" tooltip="最小化" maxwidth="34" maxheight="26" normalimage="file='res\MinBtn.png' source='0,0,34,26'" hotimage="file='res\MinBtn.png' source='0,26,34,52'" pushedimage="file='res\MinBtn.png' source='0,52,34,78'">
+                </Button>
+                <Button name="MaxBtn" tooltip="最大化" maxwidth="34" maxheight="26" normalimage="file='res\MaxBtn.png' source='0,0,34,26'" hotimage="file='res\MaxBtn.png' source='0,26,34,52'" pushedimage="file='res\MaxBtn.png' source='0,52,34,78'">
+                </Button>
+                <Button name="CloseBtn" tooltip="关闭" maxwidth="34" maxheight="26" normalimage="file='res\CloseBtn.png' source='0,0,34,26'" hotimage="file='res\CloseBtn.png' source='0,26,34,52'" pushedimage="file='res\CloseBtn.png' source='0,52,34,78'">
+                </Button>
+            </HorizontalLayout>
         </HorizontalLayout>
         <HorizontalLayout height="2" bkimage="file='res\FrameMainTitleline.png'"> <!-- 标题栏分隔线 -->
         </HorizontalLayout>
