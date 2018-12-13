@@ -480,14 +480,130 @@ void CFrameWndMain::OnLButtonClickedEnCryptStartBtn()
 // CFrameWndMain 窗口鼠标左键单击解密文件导入
 void CFrameWndMain::OnLButtonClickedDeCryptImportBtn()
 {
+	OPENFILENAME file;
+	WCHAR strfile[MAX_PATH] = { 0 };
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = _T("所有文件\0*.*\0\0");
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
+
+	if (GetOpenFileName(&file))
+	{
+		m_pDeCryptFilePath->SetText(strfile);
+	}
+
 }
 
 // CFrameWndMain 窗口鼠标左键单击解密文件导出
 void CFrameWndMain::OnLButtonClickedDeCryptExportBtn()
 {
+	CDuiString strImport = _T("");
+
+	USES_CONVERSION;
+
+	strImport = m_pDeCryptFilePath->GetText();
+	if (!strcmp(T2A(strImport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择目标文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	OPENFILENAME file;
+	WCHAR strfile[MAX_PATH] = { 0 };
+	char chType[MAX_PATH] = { 0 };
+	char chFilter[MAX_PATH] = { 0 };
+	char* pTemp = NULL;
+	char* pStr = nullptr;
+	int nSize = 0;
+
+	strcpy_s(chType, ".udf");
+	sprintf_s(chFilter, "%s文件*.%s", chType, chType);
+
+	nSize = strlen(chFilter) + 3;
+	pStr = new char[nSize];
+	memset(pStr, 0, nSize);
+	sprintf_s(pStr, nSize, "%s文件", chType);
+
+	for (pTemp = pStr; *pTemp != '\0'; ++pTemp);
+	sprintf_s(++pTemp, nSize, "*.%s", chType);
+
+	char chOriginFile[MAX_PATH] = { 0 };
+	char chOriginName[MAX_PATH] = { 0 };
+	char* pTemp2 = NULL;
+	char* pTemp3 = NULL;
+
+	strcpy_s(chOriginFile, T2A(strImport.GetData()));
+	pTemp2 = strrchr(chOriginFile, '\\');
+	strcpy_s(chOriginName, ++pTemp2);
+	pTemp3 = strrchr(chOriginName, '.');
+	if (pTemp3) *pTemp3 = '\0';
+	strcat_s(chOriginName, ".");
+	strcat_s(chOriginName, chType);
+	wcscpy_s(strfile, A2T(chOriginName));
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = A2T(pStr);
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+
+	if (GetSaveFileName(&file))
+	{
+		m_pDestFilePath->SetText(strfile);
+	}
+
+	delete[] pStr;
+	pStr = nullptr;
+
 }
 
 // CFrameWndMain 窗口鼠标左键单击解密文件开始
 void CFrameWndMain::OnLButtonClickedDeCryptStartBtn()
 {
+	CDuiString strImport = _T("");
+	CDuiString strExport = _T("");
+
+	USES_CONVERSION;
+
+	strImport = m_pDeCryptFilePath->GetText();
+	if (!strcmp(T2A(strImport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择目标文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	strExport = m_pDestFilePath->GetText();
+	if (!strcmp(T2A(strExport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择解密文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	char chExport[MAX_PATH] = { 0 };
+	char* pTemp = NULL;
+
+	strcpy_s(chExport, T2A(strExport));
+	pTemp = strrchr(chExport, '\\');
+	if (pTemp)
+	{
+		*pTemp = '\0';
+	}
+
+	m_pDeCryptStatus->SetText(_T("解密中..."));
+
+	CPlumCrypt* pCrypt = new CPlumCrypt;
+	pCrypt->PlumDeCryptFileNoExA(T2A(strImport), chExport);
+
+	m_pDeCryptStatus->SetText(_T("已完成"));
+
+	delete pCrypt;
+
 }
