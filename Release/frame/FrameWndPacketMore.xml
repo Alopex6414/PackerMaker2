@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="480,360" gdiplustext="true"> <!-- 窗口初始尺寸 -->
+    <Font id="0" name="Microsoft YaHei" size="12" bold="false" italic="false" default="true"/>
+	<Font id="1" name="Microsoft YaHei" size="14" bold="false" italic="false"/>
+	<Font id="2" name="Microsoft YaHei" size="16" bold="false" italic="false"/>
+	<Font id="3" name="Microsoft YaHei" size="18" bold="false" italic="false"/>
+    <Font id="4" name="Microsoft YaHei" size="9" bold="false" italic="false"/>
+    <Font id="5" name="Microsoft YaHei" size="14" bold="true" italic="false"/>
+    <VerticalLayout bkimage="file='res\FramePacketMoreBack.png'"> <!-- 窗口背景颜色 -->
+        <Container name="PacketMoreBk" float="true" pos="0,0,0,0" width="480" height="360" bkimage="file='res\FramePacketMoreBk.png'">
+        </Container>
+        <HorizontalLayout height="27" bkimage="file='res\FramePacketMoreTitle.png'"> <!-- 窗口标题栏 -->
+            <Button name="CloseBtn" float="true" pos="445,0,0,0" width="34" height="26" tooltip="关闭" normalimage="file='res\CloseBtn.png' source='0,0,34,26'" hotimage="file='res\CloseBtn.png' source='0,26,34,52'" pushedimage="file='res\CloseBtn.png' source='0,52,34,78'">
+            </Button>
+        </HorizontalLayout>
+        <HorizontalLayout height="333">
+            <Edit name="PacketFileType" float="true" pos="150,62,0,0" width="80" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="false" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
+            </Edit>
+            <Edit name="PacketFileName" float="true" pos="150,120,0,0" width="80" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="false" normalimage="file='res\TypeEdit.png' source='0,0,80,24'" hotimage="file='res\TypeEdit.png' source='0,24,80,48'" pushedimage="file='res\TypeEdit.png' source='0,24,80,48'" nativebkcolor="#FF232326">
+            </Edit>
+            <Edit name="PacketFilePath" float="true" pos="50,210,0,0" width="300" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEditShot.png' source='0,0,300,24'" hotimage="file='res\PathEditShot.png' source='0,24,300,48'" pushedimage="file='res\PathEditShot.png' source='0,24,300,48'" nativebkcolor="#FF232326">
+            </Edit>
+            <Button name="PacketExportBtn" float="true" pos="360,210,0,0" tooltip="导出" width="80" height="24" normalimage="file='res\ExportBtn.png' source='0,0,80,24'" hotimage="file='res\ExportBtn.png' source='0,24,80,48'" pushedimage="file='res\ExportBtn.png' source='0,48,80,72'">
+            </Button>
+            <Button name="PacketOkBtn" float="true" pos="360,285,0,0" tooltip="确定" width="80" height="24" normalimage="file='res\OkBtn.png' source='0,0,80,24'" hotimage="file='res\OkBtn.png' source='0,24,80,48'" pushedimage="file='res\OkBtn.png' source='0,48,80,72'">
+            </Button>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>
