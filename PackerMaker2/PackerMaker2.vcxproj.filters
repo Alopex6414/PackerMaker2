@@ -54,6 +54,9 @@
     <ClCompile Include="FrameWndAboutInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FrameWndPacketMore.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinMain.h">
@@ -141,6 +144,9 @@
       <Filter>Prunus</Filter>
     </ClInclude>
     <ClInclude Include="CommonType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameWndPacketMore.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

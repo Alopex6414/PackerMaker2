@@ -827,6 +827,12 @@ void CFrameWndMain::OnLButtonClickedPacketDelBtn()
 // CFrameWndMain 窗口鼠标左键单击更多封包文件
 void CFrameWndMain::OnLButtonClickedPacketMoreBtn()
 {
+	CFrameWndPacketMore cFrameWndPacketMore;
+	UINT nRet = 0;
+
+	cFrameWndPacketMore.Create(this->GetHWND(), _T("PacketMore"), WS_POPUP, WS_EX_WINDOWEDGE);
+	cFrameWndPacketMore.CenterWindow();
+	nRet = cFrameWndPacketMore.ShowModal();
 }
 
 // CFrameWndMain 窗口鼠标左键单击开始封包文件

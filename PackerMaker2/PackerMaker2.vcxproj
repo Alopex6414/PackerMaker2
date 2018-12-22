@@ -137,6 +137,7 @@
     <ClCompile Include="FrameWndMain.cpp" />
     <ClCompile Include="FrameWndMoreInfo.cpp" />
     <ClCompile Include="FrameWndMultipleFile.cpp" />
+    <ClCompile Include="FrameWndPacketMore.cpp" />
     <ClCompile Include="FrameWndSingleFile.cpp" />
     <ClCompile Include="FrameWndTextFile.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="FrameWndMain.h" />
     <ClInclude Include="FrameWndMoreInfo.h" />
     <ClInclude Include="FrameWndMultipleFile.h" />
+    <ClInclude Include="FrameWndPacketMore.h" />
     <ClInclude Include="FrameWndSingleFile.h" />
     <ClInclude Include="FrameWndTextFile.h" />
     <ClInclude Include="resource.h" />

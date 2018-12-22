@@ -66,6 +66,7 @@
 #include "FrameWndCipherInfo.h"
 #include "FrameWndMoreInfo.h"
 #include "FrameWndAboutInfo.h"
+#include "FrameWndPacketMore.h"
 #include "DialogBuilderCallbackEx.h"
 
 // Include Windows Library
