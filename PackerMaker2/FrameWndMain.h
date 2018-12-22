@@ -16,6 +16,7 @@
 
 // Include Frame Window Common Header File
 #include "CommonWnd.h"
+#include "CommonType.h"
 #include "FrameWndBase.h"
 
 // Class Definition
@@ -32,6 +33,15 @@ protected:
 
 private:
 
+
+public:
+	vector<S_PACKETTYPE> m_vecPacket;
+
+public:
+	void ConstructionExtra();
+
+	void SeekPacketFileInfo();
+	static DWORD CALLBACK SeekPacketFileInfoShowListCallBack(LPVOID lpParameter);
 
 public:
 	CButtonUI* m_pMaxBtn;
@@ -88,6 +98,10 @@ public:
 	LRESULT OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 public:
+	LRESULT OnAddPacketSeekList(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT OnAddPacketListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+
+public:
 	void OnLButtonClickedMinBtn();
 	void OnLButtonClickedMaxBtn();
 	void OnLButtonClickedCloseBtn();
@@ -99,6 +113,17 @@ public:
 	void OnLButtonClickedDeCryptExportBtn();
 	void OnLButtonClickedDeCryptStartBtn();
 
+	void OnLButtonClickedPacketAddBtn();
+	void OnLButtonClickedPacketDelBtn();
+	void OnLButtonClickedPacketMoreBtn();
+	void OnLButtonClickedPacketStartBtn();
+	void OnLButtonClickedUnpackImportBtn();
+	void OnLButtonClickedUnpackExportBtn();
+	void OnLButtonClickedUnpackStartBtn();
+
 };
+
+// Variable Definition
+extern CFrameWndMain* g_pCFrameWndMain;
 
 #endif // !__FRAMEWNDMAIN_H__

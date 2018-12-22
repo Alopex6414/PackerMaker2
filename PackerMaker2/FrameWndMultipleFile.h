@@ -25,4 +25,13 @@ public:
 
 };
 
+class CFrameWndMultipleFileListUI : public IListCallbackUI
+{
+public:
+	LPCTSTR GetItemText(CControlUI* pControl, int iIndex, int iSubItem);
+
+};
+
+extern CFrameWndMultipleFileListUI g_cCFrameWndMultipleFileListUI;
+
 #endif // !__FRAMEWNDMULTIPLEFILE_H_

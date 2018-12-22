@@ -12,6 +12,15 @@
 #include "Common.h"
 #include "FrameWndMain.h"
 
+//Macro Definition
+#define FRAMEMAIN_LIST_REFRESH_SLEEPTIME	1
+
+#define WM_USER_MSG_ADDITEM_SEEKPACKET	(WM_USER + 1)
+#define WM_USER_MSG_ADDITEM_PACKETLIST	(WM_USER + 2)
+
+// Variable Definition
+CFrameWndMain* g_pCFrameWndMain;
+
 // CFrameWndMain 获取窗口类名
 LPCTSTR CFrameWndMain::GetWindowClassName() const
 {
@@ -64,6 +73,34 @@ void CFrameWndMain::Notify(TNotifyUI & msg)
 		else if (msg.pSender == m_pDeCryptStartBtn)
 		{
 			OnLButtonClickedDeCryptStartBtn();
+		}
+		else if (msg.pSender == m_pPacketAddBtn)
+		{
+			OnLButtonClickedPacketAddBtn();
+		}
+		else if (msg.pSender == m_pPacketDelBtn)
+		{
+			OnLButtonClickedPacketDelBtn();
+		}
+		else if (msg.pSender == m_pPacketMoreBtn)
+		{
+			OnLButtonClickedPacketMoreBtn();
+		}
+		else if (msg.pSender == m_pPacketStartBtn)
+		{
+			OnLButtonClickedPacketStartBtn();
+		}
+		else if (msg.pSender == m_pUnpackImportBtn)
+		{
+			OnLButtonClickedUnpackImportBtn();
+		}
+		else if (msg.pSender == m_pUnpackExportBtn)
+		{
+			OnLButtonClickedUnpackExportBtn();
+		}
+		else if (msg.pSender == m_pUnpackStartBtn)
+		{
+			OnLButtonClickedUnpackStartBtn();
 		}
 		
 	}
@@ -136,6 +173,12 @@ LRESULT CFrameWndMain::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_NCHITTEST:
 		lRes = OnNcHitTest(uMsg, wParam, lParam, bHandled);
 		break;
+	case WM_USER_MSG_ADDITEM_SEEKPACKET:
+		lRes = OnAddPacketSeekList(uMsg, wParam, lParam, bHandled);
+		break;
+	case WM_USER_MSG_ADDITEM_PACKETLIST:
+		lRes = OnAddPacketListItem(uMsg, wParam, lParam, bHandled);
+		break;
 	default:
 		bHandled = FALSE;
 		break;
@@ -185,6 +228,47 @@ void CFrameWndMain::MoveCaption(LPARAM lParam, BOOL & bHandled)
 	}
 }
 
+// CFrameWndMain 窗口构造函数
+void CFrameWndMain::ConstructionExtra()
+{
+	g_pCFrameWndMain = this;
+
+	m_vecPacket.clear();
+}
+
+// CFrameWndMain 查询封包文件信息
+void CFrameWndMain::SeekPacketFileInfo()
+{
+	HANDLE hThread = NULL;
+	DWORD dwThreadID = 0;
+
+	m_pPacketList->RemoveAll();
+	m_pPacketList->SetTextCallback(&g_cCFrameWndMultipleFileListUI);
+	hThread = ::CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)SeekPacketFileInfoShowListCallBack, NULL, 0, &dwThreadID);
+	::CloseHandle(hThread);
+}
+
+// CFrameWndMain 查询封包文件信息显示在列表线程
+DWORD CFrameWndMain::SeekPacketFileInfoShowListCallBack(LPVOID lpParameter)
+{
+	CListUI* pList = g_pCFrameWndMain->m_pPacketList;
+
+	for (int i = 0; i < g_pCFrameWndMain->m_vecPacket.size(); ++i)
+	{
+		CListTextElementUI* pListElement = new CListTextElementUI();
+
+		pListElement->SetTag(i);
+		if (pListElement != NULL)
+		{
+			::PostMessageA(g_pCFrameWndMain->GetHWND(), WM_USER_MSG_ADDITEM_PACKETLIST, 0L, (LPARAM)pListElement);
+		}
+
+		Sleep(FRAMEMAIN_LIST_REFRESH_SLEEPTIME);
+	}
+
+	return 0;
+}
+
 // CFrameWndMain 窗口创建响应函数 
 LRESULT CFrameWndMain::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
 {
@@ -198,6 +282,7 @@ LRESULT CFrameWndMain::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & 
 	m_PaintManager.AttachDialog(pRoot);
 	m_PaintManager.AddNotifier(this);   // 添加控件等消息响应，这样消息就会传达到duilib的消息循环，我们可以在Notify函数里做消息处理
 
+	ConstructionExtra();
 	InitControlsCaption();
 
 	m_pMaxBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("MaxBtn")));
@@ -308,6 +393,26 @@ LRESULT CFrameWndMain::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
 	}
 
 	return HTCLIENT;
+}
+
+// CFrameWndMain 窗口添加封包文件查询列表消息响应
+LRESULT CFrameWndMain::OnAddPacketSeekList(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	SeekPacketFileInfo();
+	return 0;
+}
+
+// CFrameWndMain 窗口添加封包文件列表消息响应
+LRESULT CFrameWndMain::OnAddPacketListItem(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	CListTextElementUI* pListElement = (CListTextElementUI*)lParam;
+
+	if (m_pPacketList)
+	{
+		m_pPacketList->Add(pListElement);
+	}
+
+	return 0;
 }
 
 // CFrameWndMain 窗口鼠标左键单击最小化窗口
@@ -619,4 +724,127 @@ void CFrameWndMain::OnLButtonClickedDeCryptStartBtn()
 
 	delete pCrypt;
 
+}
+
+// CFrameWndMain 窗口鼠标左键单击添加封包文件
+void CFrameWndMain::OnLButtonClickedPacketAddBtn()
+{
+	OPENFILENAME file;
+	WCHAR strfile[100 * MAX_PATH] = { 0 };
+	WCHAR strpath[MAX_PATH] = { 0 };
+	WCHAR strname[MAX_PATH] = { 0 };
+	TCHAR* p = NULL;
+	int nLen = 0;
+
+	USES_CONVERSION;
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = _T("所有文件\0*.*\0\0");
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_EXPLORER | OFN_ALLOWMULTISELECT;
+
+	if (GetOpenFileName(&file))
+	{
+		lstrcpyn(strpath, strfile, file.nFileOffset);
+		strpath[file.nFileOffset] = '\0';
+		nLen = lstrlen(strpath);
+
+		if (strpath[nLen - 1] != '\\')
+		{
+			lstrcat(strpath, _T("\\"));
+		}
+
+		p = strfile + file.nFileOffset;
+
+		while (*p)
+		{
+			ZeroMemory(strname, sizeof(strname));
+			lstrcat(strname, strpath);
+			lstrcat(strname, p);
+
+			char chOriginFile[MAX_PATH] = { 0 };
+			char chOriginName[MAX_PATH] = { 0 };
+			char* pTemp = NULL;
+
+			strcpy_s(chOriginFile, T2A(strname));
+			pTemp = strrchr(chOriginFile, '\\');
+			strcpy_s(chOriginName, ++pTemp);
+
+			bool bRepeat = false;
+
+			for (auto iter = m_vecPacket.begin(); iter != m_vecPacket.end(); ++iter)
+			{
+				if (!strcmp(iter->chFilePath, T2A(strname)))
+				{
+					bRepeat = true;
+					break;
+				}
+			}
+
+			if (!bRepeat)
+			{
+				S_PACKETTYPE sPacketInfo = { 0 };
+
+				sPacketInfo.nSerial = m_vecPacket.size() + 1;
+				strcpy_s(sPacketInfo.chFileName, chOriginName);
+				strcpy_s(sPacketInfo.chFilePath, T2A(strname));
+				m_vecPacket.push_back(sPacketInfo);
+			}
+			
+			p += lstrlen(p) + 1;
+		}
+
+		::PostMessageA(this->GetHWND(), WM_USER_MSG_ADDITEM_SEEKPACKET, (WPARAM)0, (LPARAM)0);
+	}
+}
+
+// CFrameWndMain 窗口鼠标左键单击删除封包文件
+void CFrameWndMain::OnLButtonClickedPacketDelBtn()
+{
+	int nItem = 0;
+
+	nItem = m_pPacketList->GetCurSel();
+
+	if (nItem < 0)
+	{
+		MessageBoxW(this->GetHWND(), _T("请选中一条文件信息!"), _T("提示"), MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	m_vecPacket.erase(m_vecPacket.begin() + nItem);
+	for (auto iter = m_vecPacket.begin(); iter != m_vecPacket.end(); ++iter)
+	{
+		iter->nSerial = iter - m_vecPacket.begin() + 1;
+	}
+
+	::PostMessageA(this->GetHWND(), WM_USER_MSG_ADDITEM_SEEKPACKET, (WPARAM)0, (LPARAM)0);
+}
+
+// CFrameWndMain 窗口鼠标左键单击更多封包文件
+void CFrameWndMain::OnLButtonClickedPacketMoreBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击开始封包文件
+void CFrameWndMain::OnLButtonClickedPacketStartBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击导入解包文件
+void CFrameWndMain::OnLButtonClickedUnpackImportBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击导出解包文件
+void CFrameWndMain::OnLButtonClickedUnpackExportBtn()
+{
+}
+
+// CFrameWndMain 窗口鼠标左键单击开始解包文件
+void CFrameWndMain::OnLButtonClickedUnpackStartBtn()
+{
 }

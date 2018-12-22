@@ -140,6 +140,9 @@
     <ClInclude Include="..\Prunus\Inc\PlumThread.h">
       <Filter>Prunus</Filter>
     </ClInclude>
+    <ClInclude Include="CommonType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PackerMaker2.rc">

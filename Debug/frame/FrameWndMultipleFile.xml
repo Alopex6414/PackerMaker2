@@ -16,7 +16,7 @@
         </Button>
         <Button name="PacketMoreBtn" float="true" pos="660,48,0,0" tooltip="更多" width="80" height="24" normalimage="file='res\MoreBtn.png' source='0,0,80,24'" hotimage="file='res\MoreBtn.png' source='0,24,80,48'" pushedimage="file='res\MoreBtn.png' source='0,48,80,72'">
         </Button>
-        <List name="PacketList" float="true" pos="40,90,0,0" bkcolor="#FF232326" width="700" height="300" vscrollbar="true" hscrollbar="false" itemalign="center" itemaltbk="true" itemtextcolor="#FFFFFFFF" itembkcolor="#FF2C3D5F" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF364769" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FF4A5B7D" itemshowhtml="true">
+        <List name="PacketList" float="true" pos="40,90,0,0" bkcolor="#FF232326" width="700" height="300" vscrollbar="true" hscrollbar="false" itemalign="center" itemaltbk="true" itemtextcolor="#FFFFFFFF" itembkcolor="#FF19191C" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF37373A" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FF414144" itemshowhtml="true">
             <ListHeader height="24">
                 <ListHeaderItem text="序号" bkcolor="#FF2D2D30" textcolor="#FFFFFFFF" font="1" width="70"/>
                 <ListHeaderItem text="文件" bkcolor="#FF2D2D30" textcolor="#FFFFFFFF" font="1" width="210"/>
