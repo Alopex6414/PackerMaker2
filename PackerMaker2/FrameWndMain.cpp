@@ -231,6 +231,19 @@ LRESULT CFrameWndMain::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & 
 	m_pDeCryptStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("DeCryptStartBtn")));
 	m_pDeCryptStatus = static_cast<CTextUI*>(m_PaintManager.FindControl(_T("DeCryptStatus")));
 
+	// Multiple File
+	m_pPacketAddBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketAddBtn")));
+	m_pPacketDelBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketDelBtn")));
+	m_pPacketMoreBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketMoreBtn")));
+	m_pPacketList = static_cast<CListUI*>(m_PaintManager.FindControl(_T("PacketList")));
+	m_pPacketStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketStartBtn")));
+
+	m_pUnpackPakPath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("UnpackPakPath")));
+	m_pDestPakPath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("DestPakPath")));
+	m_pUnpackImportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("UnpackImportBtn")));
+	m_pUnpackExportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("UnpackExportBtn")));
+	m_pUnpackStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("UnpackStartBtn")));
+
 	SetWindowInfo(960, 720);
 
 	return 0;

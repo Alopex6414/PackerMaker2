@@ -66,7 +66,17 @@ public:
 	CTextUI* m_pDeCryptStatus;
 
 	// Multiple File
+	CButtonUI* m_pPacketAddBtn;
+	CButtonUI* m_pPacketDelBtn;
+	CButtonUI* m_pPacketMoreBtn;
+	CListUI* m_pPacketList;
+	CButtonUI* m_pPacketStartBtn;
 
+	CEditUI* m_pUnpackPakPath;
+	CEditUI* m_pDestPakPath;
+	CButtonUI* m_pUnpackImportBtn;
+	CButtonUI* m_pUnpackExportBtn;
+	CButtonUI* m_pUnpackStartBtn;
 
 public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
