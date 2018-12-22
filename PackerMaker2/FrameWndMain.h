@@ -65,6 +65,9 @@ public:
 	CButtonUI* m_pDeCryptStartBtn;
 	CTextUI* m_pDeCryptStatus;
 
+	// Multiple File
+
+
 public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);

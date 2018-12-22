@@ -6,4 +6,15 @@
 	<Font id="3" name="Microsoft YaHei" size="18" bold="false" italic="false"/>
     <Font id="4" name="Microsoft YaHei" size="9" bold="false" italic="false"/>
     <Font id="5" name="Microsoft YaHei" size="14" bold="true" italic="false"/>
+    <VerticalLayout bkimage="file='res\FrameMultipleFileBack.png'"> <!-- 窗口背景颜色 -->
+        <Container name="MultipleFilesList" float="true" pos="40,90,0,0" width="700" height="300" bkimage="file='res\FrameMultipleFileList.png'">
+        </Container>
+        <List name="PacketList" float="true" pos="40,90,0,0" bkcolor="#FF232326" width="700" height="300" vscrollbar="true" hscrollbar="false" itemalign="center" itemaltbk="true" itemtextcolor="#FFFFFFFF" itembkcolor="#FF2C3D5F" itemhottextcolor="#FFFFFFFF" itemhotbkcolor="#FF364769" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#FF4A5B7D" itemshowhtml="true">
+            <ListHeader height="24">
+                <ListHeaderItem text="序号" bkcolor="#FF2D2D30" textcolor="#FFFFFFFF" font="1" width="70"/>
+                <ListHeaderItem text="文件" bkcolor="#FF2D2D30" textcolor="#FFFFFFFF" font="1" width="210"/>
+                <ListHeaderItem text="路径" bkcolor="#FF2D2D30" textcolor="#FFFFFFFF" font="1" width="420"/>
+                </ListHeader>
+        </List>
+    </VerticalLayout>
 </Window>
