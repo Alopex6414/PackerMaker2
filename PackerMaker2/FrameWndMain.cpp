@@ -234,6 +234,10 @@ void CFrameWndMain::ConstructionExtra()
 	g_pCFrameWndMain = this;
 
 	m_vecPacket.clear();
+
+	m_csPacketFileType = _T("pak");
+	m_csPacketFileName = _T("MyPacket");
+	m_csPacketFilePath = _T("C:\\MyPacket.pak");
 }
 
 // CFrameWndMain 查询封包文件信息
@@ -830,9 +834,19 @@ void CFrameWndMain::OnLButtonClickedPacketMoreBtn()
 	CFrameWndPacketMore cFrameWndPacketMore;
 	UINT nRet = 0;
 
+	cFrameWndPacketMore.SetPacketFileType(m_csPacketFileType);
+	cFrameWndPacketMore.SetPacketFileName(m_csPacketFileName);
+	cFrameWndPacketMore.SetPacketFilePath(m_csPacketFilePath);
 	cFrameWndPacketMore.Create(this->GetHWND(), _T("PacketMore"), WS_POPUP, WS_EX_WINDOWEDGE);
 	cFrameWndPacketMore.CenterWindow();
 	nRet = cFrameWndPacketMore.ShowModal();
+	if (nRet == 1)
+	{
+		m_csPacketFileType = cFrameWndPacketMore.GetPacketFileType();
+		m_csPacketFileName = cFrameWndPacketMore.GetPacketFileName();
+		m_csPacketFilePath = cFrameWndPacketMore.GetPacketFilePath();
+	}
+
 }
 
 // CFrameWndMain 窗口鼠标左键单击开始封包文件

@@ -23,7 +23,11 @@
                 <ListHeaderItem text="路径" bkcolor="#FF2D2D30" textcolor="#FFFFFFFF" font="1" width="420"/>
             </ListHeader>
         </List>
-        <Button name="PacketStartBtn" float="true" pos="660,408,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
+        <Progress name="PacketProgress" float="true" pos="150,410,0,0" min="0" max="100" value="100" width="400" height="24" bkimage="file='res\Progress.png' source='0,0,400,24'" foreimage="file='res\Progress.png' source='0,24,400,48'">
+        </Progress>
+        <Text name="PacketStatus" text="Wait..." float="true" pos="560,412,0,0" width="80" height="24" textcolor="#FFD7D7D7" font="0">
+        </Text>
+        <Button name="PacketStartBtn" float="true" pos="660,410,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
         </Button>
         <!-- Unpack -->
         <Edit name="UnpackPakPath" float="true" pos="178,505,0,0" width="400" height="24" maxchar="8" textpadding="5,1,5,1" textcolor="#FFD7D7D7" font="0" readonly="true" normalimage="file='res\PathEdit.png' source='0,0,400,24'" hotimage="file='res\PathEdit.png' source='0,24,400,48'" pushedimage="file='res\PathEdit.png' source='0,24,400,48'" nativebkcolor="#FF232326">
@@ -34,7 +38,11 @@
         </Button>
         <Button name="UnpackExportBtn" float="true" pos="598,562,0,0" tooltip="导出" width="80" height="24" normalimage="file='res\ExportBtn.png' source='0,0,80,24'" hotimage="file='res\ExportBtn.png' source='0,24,80,48'" pushedimage="file='res\ExportBtn.png' source='0,48,80,72'">
         </Button>
-        <Button name="UnpackStartBtn" float="true" pos="660,628,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
+        <Progress name="UnpackProgress" float="true" pos="150,630,0,0" min="0" max="100" value="100" width="400" height="24" bkimage="file='res\Progress.png' source='0,0,400,24'" foreimage="file='res\Progress.png' source='0,24,400,48'">
+        </Progress>
+        <Text name="UnpackStatus" text="Wait..." float="true" pos="560,632,0,0" width="80" height="24" textcolor="#FFD7D7D7" font="0">
+        </Text>
+        <Button name="UnpackStartBtn" float="true" pos="660,630,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
         </Button>
     </VerticalLayout>
 </Window>

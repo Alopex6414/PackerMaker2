@@ -32,7 +32,9 @@ protected:
 	virtual void MoveCaption(LPARAM lParam, BOOL& bHandled);
 
 private:
-
+	CDuiString m_csPacketFileType;
+	CDuiString m_csPacketFileName;
+	CDuiString m_csPacketFilePath;
 
 public:
 	vector<S_PACKETTYPE> m_vecPacket;

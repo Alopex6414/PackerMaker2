@@ -27,12 +27,39 @@ public:
 	virtual void Notify(TNotifyUI& msg);
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+private:
+	CDuiString m_csPacketFileType;
+	CDuiString m_csPacketFileName;
+	CDuiString m_csPacketFilePath;
+
+public:
+	void ConstructionExtra();
+	void InitControls();
+
+	void SetPacketFileType(CDuiString csFileType) { m_csPacketFileType = csFileType; }
+	void SetPacketFileName(CDuiString csFileName) { m_csPacketFileName = csFileName; }
+	void SetPacketFilePath(CDuiString csFilePath) { m_csPacketFilePath = csFilePath; }
+	CDuiString GetPacketFileType() { return m_csPacketFileType; }
+	CDuiString GetPacketFileName() { return m_csPacketFileName; }
+	CDuiString GetPacketFilePath() { return m_csPacketFilePath; }
+
+public:
+	CEditUI* m_pPacketFileType;
+	CEditUI* m_pPacketFileName;
+	CEditUI* m_pPacketFilePath;
+	CButtonUI* m_pPacketExportBtn;
+	CButtonUI* m_pPacketOkBtn;
+	CButtonUI* m_pPacketCancelBtn;
+
 public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 public:
 	void OnLButtonClickedCloseBtn();
+	void OnLButtonClickedExportBtn();
+	void OnLButtonClickedOkBtn();
+	void OnLButtonClickedCancel();
 
 };
 
