@@ -140,6 +140,7 @@
     <ClCompile Include="FrameWndPacketMore.cpp" />
     <ClCompile Include="FrameWndSingleFile.cpp" />
     <ClCompile Include="FrameWndTextFile.cpp" />
+    <ClCompile Include="PacketThread.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +172,7 @@
     <ClInclude Include="FrameWndPacketMore.h" />
     <ClInclude Include="FrameWndSingleFile.h" />
     <ClInclude Include="FrameWndTextFile.h" />
+    <ClInclude Include="PacketThread.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="WinMain.h" />
   </ItemGroup>

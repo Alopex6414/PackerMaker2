@@ -57,6 +57,9 @@
     <ClCompile Include="FrameWndPacketMore.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="PacketThread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WinMain.h">
@@ -147,6 +150,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="FrameWndPacketMore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PacketThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

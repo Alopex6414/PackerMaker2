@@ -14,6 +14,10 @@
 
 //Macro Definition
 #define FRAMEMAIN_LIST_REFRESH_SLEEPTIME	1
+#define FRAMEMAIN_PROGRESS_REFRESH_TIME		100
+
+#define FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH		0
+#define FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH		1
 
 #define WM_USER_MSG_ADDITEM_SEEKPACKET	(WM_USER + 1)
 #define WM_USER_MSG_ADDITEM_PACKETLIST	(WM_USER + 2)
@@ -161,6 +165,9 @@ LRESULT CFrameWndMain::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CLOSE:
 		lRes = OnClose(uMsg, wParam, lParam, bHandled);
 		break;
+	case WM_TIMER:
+		lRes = OnTimer(uMsg, wParam, lParam, bHandled);
+		break;
 	case WM_NCACTIVATE:
 		lRes = OnNcActivate(uMsg, wParam, lParam, bHandled);
 		break;
@@ -234,6 +241,8 @@ void CFrameWndMain::ConstructionExtra()
 	g_pCFrameWndMain = this;
 
 	m_vecPacket.clear();
+
+	m_pPlumPackerThread = NULL;
 
 	m_csPacketFileType = _T("pak");
 	m_csPacketFileName = _T("MyPacket");
@@ -325,12 +334,16 @@ LRESULT CFrameWndMain::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & 
 	m_pPacketDelBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketDelBtn")));
 	m_pPacketMoreBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketMoreBtn")));
 	m_pPacketList = static_cast<CListUI*>(m_PaintManager.FindControl(_T("PacketList")));
+	m_pPacketProgress = static_cast<CProgressUI*>(m_PaintManager.FindControl(_T("PacketProgress")));
+	m_pPacketStatus = static_cast<CTextUI*>(m_PaintManager.FindControl(_T("PacketStatus")));
 	m_pPacketStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("PacketStartBtn")));
 
 	m_pUnpackPakPath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("UnpackPakPath")));
 	m_pDestPakPath = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("DestPakPath")));
 	m_pUnpackImportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("UnpackImportBtn")));
 	m_pUnpackExportBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("UnpackExportBtn")));
+	m_pUnpackProgress = static_cast<CProgressUI*>(m_PaintManager.FindControl(_T("UnpackProgress")));
+	m_pUnpackStatus = static_cast<CTextUI*>(m_PaintManager.FindControl(_T("UnpackStatus")));
 	m_pUnpackStartBtn = static_cast<CButtonUI*>(m_PaintManager.FindControl(_T("UnpackStartBtn")));
 
 	SetWindowInfo(960, 720);
@@ -349,6 +362,49 @@ LRESULT CFrameWndMain::OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 LRESULT CFrameWndMain::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
 {
 	bHandled = FALSE;
+
+	if (m_pPlumPackerThread)
+	{
+		m_pPlumPackerThread->PlumThreadExit();
+		delete m_pPlumPackerThread;
+		m_pPlumPackerThread = NULL;
+	}
+
+	return 0;
+}
+
+// CFrameWndMain 窗口定时器响应函数
+LRESULT CFrameWndMain::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	DWORD nID = wParam;
+
+	switch (nID)
+	{
+	case FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH:
+		{
+			CDuiString csConvCount = _T("");
+			CDuiString csAllCount = _T("");
+
+			csConvCount.Format(_T("%d"), g_nPackerCount);
+			csAllCount.Format(_T("%d"), m_vecPacket.size());
+
+			m_pPacketProgress->SetValue(g_nPackerCount);
+			m_pPacketStatus->SetText(csConvCount + _T("/") + csAllCount);
+			if (g_nPackerCount == m_vecPacket.size())
+			{
+				m_pPacketStatus->SetText(_T("Finish!"));
+				::KillTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH);
+			}
+			break;
+		}
+	case FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH:
+		{
+			break;
+		}
+	default:
+		break;
+	}
+
 	return 0;
 }
 
@@ -852,6 +908,77 @@ void CFrameWndMain::OnLButtonClickedPacketMoreBtn()
 // CFrameWndMain 窗口鼠标左键单击开始封包文件
 void CFrameWndMain::OnLButtonClickedPacketStartBtn()
 {
+	if (m_vecPacket.empty())
+	{
+		MessageBoxA(this->GetHWND(), "请选择至少一个封包文件!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	USES_CONVERSION;
+
+	if (!strcmp("", T2A(m_csPacketFilePath.GetData())))
+	{
+		return;
+	}
+
+	m_pPacketProgress->SetMinValue(0);
+	m_pPacketProgress->SetMaxValue(m_vecPacket.size());
+	m_pPacketProgress->SetValue(0);
+
+	::KillTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH);
+	::SetTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH, FRAMEMAIN_PROGRESS_REFRESH_TIME, NULL);
+
+	DWORD dwLuckyNumberArr[4] =
+	{
+		0x00000000,
+		0x00000000,
+		0x00000000,
+		0x00000000,
+	};
+
+	srand((unsigned int)time(NULL));
+
+	for (auto &it : dwLuckyNumberArr)
+	{
+		it = rand();
+	}
+
+	for (int i = 0; i < 4; ++i)
+	{
+		g_dwLuckyArr[i] = dwLuckyNumberArr[i];
+	}
+
+	int nSize = 0;
+	int nLen = 0;
+
+	nSize = m_vecPacket.size();
+	g_nSrcSize = nSize;
+	g_ppSrcArr = (char**)malloc(nSize * sizeof(char*));
+
+	for (int i = 0; i < nSize; ++i)
+	{
+		nLen = strlen(m_vecPacket[i].chFilePath);
+		*(g_ppSrcArr + i) = (char*)malloc((nLen + 1) * sizeof(char));
+		memset(*(g_ppSrcArr + i), 0, (nLen + 1));
+		strcpy_s(*(g_ppSrcArr + i), (nLen + 1), m_vecPacket[i].chFilePath);
+	}
+
+	nLen = WideCharToMultiByte(CP_ACP, 0, m_csPacketFilePath.GetData(), -1, NULL, 0, NULL, NULL);
+	g_pDestArr = (char*)malloc((nLen + 1) * sizeof(char));
+	WideCharToMultiByte(CP_ACP, 0, m_csPacketFilePath.GetData(), -1, g_pDestArr, nLen, NULL, NULL);
+
+	if (m_pPlumPackerThread)
+	{
+		m_pPlumPackerThread->PlumThreadExit();
+		delete m_pPlumPackerThread;
+		m_pPlumPackerThread = NULL;
+	}
+
+	g_nPackerCheck = 0;
+
+	m_pPlumPackerThread = new CPlumThread(&m_PackerThread);
+	m_pPlumPackerThread->PlumThreadInit();
+
 }
 
 // CFrameWndMain 窗口鼠标左键单击导入解包文件

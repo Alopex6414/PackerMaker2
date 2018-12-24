@@ -25,7 +25,7 @@
         </List>
         <Progress name="PacketProgress" float="true" pos="150,410,0,0" min="0" max="100" value="100" width="400" height="24" bkimage="file='res\Progress.png' source='0,0,400,24'" foreimage="file='res\Progress.png' source='0,24,400,48'">
         </Progress>
-        <Text name="PacketStatus" text="Wait..." float="true" pos="560,412,0,0" width="80" height="24" textcolor="#FFD7D7D7" font="0">
+        <Text name="PacketStatus" text="Wait..." float="true" pos="560,412,0,0" width="120" height="24" textcolor="#FFD7D7D7" font="0">
         </Text>
         <Button name="PacketStartBtn" float="true" pos="660,410,0,0" tooltip="开始" width="80" height="24" normalimage="file='res\StartBtn.png' source='0,0,80,24'" hotimage="file='res\StartBtn.png' source='0,24,80,48'" pushedimage="file='res\StartBtn.png' source='0,48,80,72'">
         </Button>

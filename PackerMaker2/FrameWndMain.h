@@ -18,6 +18,7 @@
 #include "CommonWnd.h"
 #include "CommonType.h"
 #include "FrameWndBase.h"
+#include "PacketThread.h"
 
 // Class Definition
 class CFrameWndMain : public CFrameWndBase
@@ -38,6 +39,9 @@ private:
 
 public:
 	vector<S_PACKETTYPE> m_vecPacket;
+
+	CPacketThread m_PackerThread;
+	CPlumThread* m_pPlumPackerThread;
 
 public:
 	void ConstructionExtra();
@@ -82,18 +86,23 @@ public:
 	CButtonUI* m_pPacketDelBtn;
 	CButtonUI* m_pPacketMoreBtn;
 	CListUI* m_pPacketList;
+	CProgressUI* m_pPacketProgress;
+	CTextUI* m_pPacketStatus;
 	CButtonUI* m_pPacketStartBtn;
 
 	CEditUI* m_pUnpackPakPath;
 	CEditUI* m_pDestPakPath;
 	CButtonUI* m_pUnpackImportBtn;
 	CButtonUI* m_pUnpackExportBtn;
+	CProgressUI* m_pUnpackProgress;
+	CTextUI* m_pUnpackStatus;
 	CButtonUI* m_pUnpackStartBtn;
 
 public:
 	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	LRESULT OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnNcActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnNcCalcSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
