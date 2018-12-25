@@ -69,6 +69,7 @@
 #include "FrameWndPacketMore.h"
 #include "DialogBuilderCallbackEx.h"
 #include "PacketThread.h"
+#include "UnpackThread.h"
 
 // Include Windows Library
 #pragma comment(lib, "Shlwapi.lib")

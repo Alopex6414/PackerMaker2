@@ -19,6 +19,7 @@
 #include "CommonType.h"
 #include "FrameWndBase.h"
 #include "PacketThread.h"
+#include "UnpackThread.h"
 
 // Class Definition
 class CFrameWndMain : public CFrameWndBase
@@ -42,6 +43,9 @@ public:
 
 	CPacketThread m_PackerThread;
 	CPlumThread* m_pPlumPackerThread;
+
+	CUnpackThread m_UnPackerThread;
+	CPlumThread* m_pPlumUnPackerThread;
 
 public:
 	void ConstructionExtra();

@@ -14,10 +14,12 @@
 
 //Macro Definition
 #define FRAMEMAIN_LIST_REFRESH_SLEEPTIME	1
+#define FRAMEMAIN_PROGRESS_CONFIG_TIME		10
 #define FRAMEMAIN_PROGRESS_REFRESH_TIME		100
 
 #define FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH		0
 #define FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH		1
+#define FRAMEMAIN_TIMER_PROGRESS_UNPACK_CONFIG		2
 
 #define WM_USER_MSG_ADDITEM_SEEKPACKET	(WM_USER + 1)
 #define WM_USER_MSG_ADDITEM_PACKETLIST	(WM_USER + 2)
@@ -243,6 +245,7 @@ void CFrameWndMain::ConstructionExtra()
 	m_vecPacket.clear();
 
 	m_pPlumPackerThread = NULL;
+	m_pPlumUnPackerThread = NULL;
 
 	m_csPacketFileType = _T("pak");
 	m_csPacketFileName = _T("MyPacket");
@@ -370,6 +373,13 @@ LRESULT CFrameWndMain::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & b
 		m_pPlumPackerThread = NULL;
 	}
 
+	if (m_pPlumUnPackerThread)
+	{
+		m_pPlumUnPackerThread->PlumThreadExit();
+		delete m_pPlumUnPackerThread;
+		m_pPlumUnPackerThread = NULL;
+	}
+
 	return 0;
 }
 
@@ -382,6 +392,7 @@ LRESULT CFrameWndMain::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & b
 	{
 	case FRAMEMAIN_TIMER_PROGRESS_PACKET_REFRESH:
 		{
+			CDuiString csTip = _T("Packet:");
 			CDuiString csConvCount = _T("");
 			CDuiString csAllCount = _T("");
 
@@ -389,7 +400,7 @@ LRESULT CFrameWndMain::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & b
 			csAllCount.Format(_T("%d"), m_vecPacket.size());
 
 			m_pPacketProgress->SetValue(g_nPackerCount);
-			m_pPacketStatus->SetText(csConvCount + _T("/") + csAllCount);
+			m_pPacketStatus->SetText(csTip + csConvCount + _T("/") + csAllCount);
 			if (g_nPackerCount == m_vecPacket.size())
 			{
 				m_pPacketStatus->SetText(_T("Finish!"));
@@ -399,6 +410,31 @@ LRESULT CFrameWndMain::OnTimer(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & b
 		}
 	case FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH:
 		{
+			CDuiString csTip = _T("Unpack:");
+			CDuiString csConvCount = _T("");
+			CDuiString csAllCount = _T("");
+
+			csConvCount.Format(_T("%d"), g_nUnPackCount);
+			csAllCount.Format(_T("%d"), g_nUnPackSize);
+
+			m_pUnpackProgress->SetValue(g_nUnPackCount);
+			m_pUnpackStatus->SetText(csTip + csConvCount + _T("/") + csAllCount);
+			if (g_nUnPackCount == g_nUnPackSize)
+			{
+				m_pUnpackStatus->SetText(_T("Finish!"));
+				::KillTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH);
+			}
+			break;
+		}
+	case FRAMEMAIN_TIMER_PROGRESS_UNPACK_CONFIG:
+		{
+			if (g_nUnPackSize != 0)
+			{
+				m_pUnpackProgress->SetMinValue(0);
+				m_pUnpackProgress->SetMaxValue(g_nUnPackSize);
+				m_pUnpackProgress->SetValue(0);
+				::KillTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_UNPACK_CONFIG);
+			}
 			break;
 		}
 	default:
@@ -984,14 +1020,142 @@ void CFrameWndMain::OnLButtonClickedPacketStartBtn()
 // CFrameWndMain 窗口鼠标左键单击导入解包文件
 void CFrameWndMain::OnLButtonClickedUnpackImportBtn()
 {
+	OPENFILENAME file;
+	WCHAR strfile[MAX_PATH] = { 0 };
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = _T("所有文件\0*.*\0\0");
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
+
+	if (GetOpenFileName(&file))
+	{
+		m_pUnpackPakPath->SetText(strfile);
+	}
 }
 
 // CFrameWndMain 窗口鼠标左键单击导出解包文件
 void CFrameWndMain::OnLButtonClickedUnpackExportBtn()
 {
+	CDuiString strType = _T("");
+	CDuiString strImport = _T("");
+
+	USES_CONVERSION;
+
+	strImport = m_pUnpackPakPath->GetText();
+	if (!strcmp(T2A(strImport.GetData()), ""))
+	{
+		MessageBoxA(this->GetHWND(), "请选择目标文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	strType = _T("unk");
+
+	OPENFILENAME file;
+	WCHAR strfile[MAX_PATH] = { 0 };
+	char chType[MAX_PATH] = { 0 };
+	char chFilter[MAX_PATH] = { 0 };
+	char* pTemp = NULL;
+	char* pStr = nullptr;
+	int nSize = 0;
+
+	strcpy_s(chType, T2A(strType.GetData()));
+	sprintf_s(chFilter, "%s文件*.%s", chType, chType);
+
+	nSize = strlen(chFilter) + 3;
+	pStr = new char[nSize];
+	memset(pStr, 0, nSize);
+	sprintf_s(pStr, nSize, "%s文件", chType);
+
+	for (pTemp = pStr; *pTemp != '\0'; ++pTemp);
+	sprintf_s(++pTemp, nSize, "*.%s", chType);
+
+	char chOriginFile[MAX_PATH] = { 0 };
+	char chOriginName[MAX_PATH] = { 0 };
+	char* pTemp2 = NULL;
+	char* pTemp3 = NULL;
+
+	strcpy_s(chOriginFile, T2A(strImport.GetData()));
+	pTemp2 = strrchr(chOriginFile, '\\');
+	strcpy_s(chOriginName, ++pTemp2);
+	pTemp3 = strrchr(chOriginName, '.');
+	if (pTemp3) *pTemp3 = '\0';
+	strcat_s(chOriginName, ".");
+	strcat_s(chOriginName, chType);
+	wcscpy_s(strfile, A2T(chOriginName));
+
+	ZeroMemory(&file, sizeof(OPENFILENAME));
+
+	file.lStructSize = sizeof(OPENFILENAME);
+	file.lpstrFilter = A2T(pStr);
+	file.nFilterIndex = 1;
+	file.lpstrFile = strfile;
+	file.nMaxFile = sizeof(strfile);
+	file.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT;
+
+	if (GetSaveFileName(&file))
+	{
+		m_pDestPakPath->SetText(strfile);
+	}
+
+	delete[] pStr;
+	pStr = nullptr;
 }
 
 // CFrameWndMain 窗口鼠标左键单击开始解包文件
 void CFrameWndMain::OnLButtonClickedUnpackStartBtn()
 {
+	CDuiString strImport = _T("");
+	CDuiString strExport = _T("");
+
+	USES_CONVERSION;
+
+	strImport = m_pUnpackPakPath->GetText();
+	strExport = m_pDestPakPath->GetText();
+
+	if (!strcmp("", T2A(strImport.GetData())))
+	{
+		MessageBoxA(this->GetHWND(), "请选择目标文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	if (!strcmp("", T2A(strExport.GetData())))
+	{
+		MessageBoxA(this->GetHWND(), "请选择解包文件路径!", "提示", MB_OK | MB_ICONASTERISK);
+		return;
+	}
+
+	strExport = strExport.Left(strExport.ReverseFind('\\'));
+	strExport += _T("\\");
+
+	int nLen;
+
+	nLen = WideCharToMultiByte(CP_ACP, 0, strImport.GetData(), -1, NULL, 0, NULL, NULL);
+	g_pUnPackSrcArr = (char*)malloc((nLen + 1) * sizeof(char));
+	WideCharToMultiByte(CP_ACP, 0, strImport.GetData(), -1, g_pUnPackSrcArr, nLen, NULL, NULL);
+
+	nLen = WideCharToMultiByte(CP_ACP, 0, strExport.GetData(), -1, NULL, 0, NULL, NULL);
+	g_pUnPackDestArr = (char*)malloc((nLen + 1) * sizeof(char));
+	WideCharToMultiByte(CP_ACP, 0, strExport.GetData(), -1, g_pUnPackDestArr, nLen, NULL, NULL);
+
+	if (m_pPlumUnPackerThread)
+	{
+		m_pPlumUnPackerThread->PlumThreadExit();
+		delete m_pPlumUnPackerThread;
+		m_pPlumUnPackerThread = NULL;
+	}
+
+	m_pPlumUnPackerThread = new CPlumThread(&m_UnPackerThread);
+	m_pPlumUnPackerThread->PlumThreadInit();
+
+	::KillTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH);
+	::SetTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_UNPACK_REFRESH, FRAMEMAIN_PROGRESS_REFRESH_TIME, NULL);
+
+	::KillTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_UNPACK_CONFIG);
+	::SetTimer(this->GetHWND(), FRAMEMAIN_TIMER_PROGRESS_UNPACK_CONFIG, FRAMEMAIN_PROGRESS_CONFIG_TIME, NULL);
+
 }
